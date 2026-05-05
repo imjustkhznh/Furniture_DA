@@ -146,3 +146,4 @@ Route::post('/select-delivery-home','App\Http\Controllers\CheckoutController@sel
 // Kkieemr tra don hang
 Route::get('/track-ID','App\Http\Controllers\CartController@track_id');
 Route::post('/send-bill','App\Http\Controllers\CartController@send_bill');
+Route::get('/order-detail/{OrderID}','App\Http\Controllers\CartController@view_order_detail');

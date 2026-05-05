@@ -52,12 +52,17 @@
                       <p>Email <span><?php echo $info->ShippingEmail;?></span></p>
                       <p>Số điện thoại <span><?php echo $info->ShippingPhone;?></span></p>
                       <p>Địa chỉ <span><?php echo $info->ShippingAddress;?></span></p>
-                      @if ($info->OrderStatus == 1)
-                          <p>Tình trạng <span><strong>Đang giao hàng</strong></span></p>
-                      @endif
-                      @if ($info->OrderStatus == 0)
-                          <p>Tình trạng <span><strong>Chờ xác nhận</strong></span></p>
-                      @endif
+                      <p>Tình trạng <span>
+                        @if ($info->OrderStatus == 0)
+                          <strong>Chờ xử lí</strong>
+                        @elseif ($info->OrderStatus == 1)
+                          <strong>Đã xác nhận</strong>
+                        @elseif ($info->OrderStatus == 2)
+                          <strong>Đã giao hàng</strong>
+                        @else
+                          <strong>Không xác định</strong>
+                        @endif
+                      </span></p>
                       @endforeach
                       @foreach ($info_order_tbl as $key => $value_total)
                       <h4>Tổng tiền : <span>{{number_format($value_total->OrderTotal)}} VNĐ</span></h4>

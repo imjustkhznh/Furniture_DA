@@ -65,11 +65,13 @@ class CompareController extends Controller
     public function remove_compare($ProID)
     {
         if (Session::get('Compare') == true) {
-            foreach (Session::get('Compare') as $key => $value) {
-                $value['ProductID'] = $ProID;
-                unset(Session::get('Compare')[$key]);
+            $compare = Session::get('Compare');
+            foreach ($compare as $key => $value) {
+                if ($value['ProductID'] == $ProID) {
+                    unset($compare[$key]);
+                }
             }
-            Session::put('Compare', Session::get('Compare'));
+            Session::put('Compare', $compare);
         }
 
         return redirect()->back();

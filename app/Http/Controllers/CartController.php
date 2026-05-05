@@ -51,6 +51,14 @@ class CartController extends Controller
         return view('pages.track.detail_track')->with(compact('info_order', 'info_order_tbl'));
     }
 
+    public function view_order_detail($OrderID)
+    {
+        $info_order = DB::table('tbl_bill_detail')->where('OrderID', $OrderID)->get();
+        $info_order_tbl = DB::table('tbl_order')->where('OrderID', $OrderID)->join('tbl_shipping', 'tbl_shipping.ShippingID', '=', 'tbl_order.ShippingID')->get();
+
+        return view('pages.track.detail_track')->with(compact('info_order', 'info_order_tbl'));
+    }
+
     public function add_cart_home($ProID)
     {
         $Product_quanty = 1;

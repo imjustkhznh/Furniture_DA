@@ -80,14 +80,19 @@
                         <tr>
                           <td>{{$value->OrderID}}</td>
                           <td>{{$value->OrderDate}}</td>
-                          @if ($value->OrderStatus == 1)
-                            <td>Đã xác nhận</td>
-                          @endif
-                          @if ($value->OrderStatus == 0)
-                            <td>Chờ xử lí</td>
-                          @endif
+                          <td>
+                            @if ($value->OrderStatus == 0)
+                              Chờ xử lí
+                            @elseif ($value->OrderStatus == 1)
+                              Đã xác nhận
+                            @elseif ($value->OrderStatus == 2)
+                              Đã giao hàng
+                            @else
+                              Không xác định
+                            @endif
+                          </td>
                           <td>{{$value->OrderTotal}} VNĐ</td>
-                          <td><a href="{{URL::to('/track-ID')}}" class="check-btn sqr-btn ">Xem</a></td>
+                          <td><a href="{{URL::to('/order-detail/'.$value->OrderID)}}" class="check-btn sqr-btn ">Xem</a></td>
                         </tr>
                         @endforeach
                       </tbody>
