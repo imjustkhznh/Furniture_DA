@@ -765,181 +765,32 @@
 				});
 	</script>
 	<!-- Google Map -->
-	<script
-		src="https://maps.google.com/maps/api/js?sensor=false&amp;libraries=geometry&amp;v=3.22&amp;key=AIzaSyChs2QWiAhnzz0a4OEhzqCXwx_qA9ST_lE"></script>
+	<!-- Leaflet Map (OpenStreetMap) - No API key required -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 	<script>
-		// When the window has finished loading create our google map below
-		google.maps.event.addDomListener(window, 'load', init);
+		// When the window has finished loading create our map
+		window.addEventListener('load', init);
 
 		function init() {
-			// Basic options for a simple Google Map
-			// For more options see: https://developers.google.com/maps/documentation/javascript/reference#MapOptions
-			var mapOptions = {
-				// How zoomed in you want the map to start at (always required)
-				zoom: 12,
-
-				scrollwheel: false,
-
-				// The latitude and longitude to center the map (always required)
-				center: new google.maps.LatLng(15.9752064,108.2516492), // New York
-
-				// How you would like to style the map.
-				// This is where you would paste any style found on
-
-				styles: [
-					{
-						"featureType": "landscape.man_made",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"color": "#f7f1df"
-							}
-						]
-					},
-					{
-						"featureType": "landscape.natural",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"color": "#d0e3b4"
-							}
-						]
-					},
-					{
-						"featureType": "landscape.natural.terrain",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"visibility": "off"
-							}
-						]
-					},
-					{
-						"featureType": "poi",
-						"elementType": "labels",
-						"stylers": [
-							{
-								"visibility": "off"
-							}
-						]
-					},
-					{
-						"featureType": "poi.business",
-						"elementType": "all",
-						"stylers": [
-							{
-								"visibility": "off"
-							}
-						]
-					},
-					{
-						"featureType": "poi.medical",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"color": "#fbd3da"
-							}
-						]
-					},
-					{
-						"featureType": "poi.park",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"color": "#bde6ab"
-							}
-						]
-					},
-					{
-						"featureType": "road",
-						"elementType": "geometry.stroke",
-						"stylers": [
-							{
-								"visibility": "off"
-							}
-						]
-					},
-					{
-						"featureType": "road",
-						"elementType": "labels",
-						"stylers": [
-							{
-								"visibility": "off"
-							}
-						]
-					},
-					{
-						"featureType": "road.highway",
-						"elementType": "geometry.fill",
-						"stylers": [
-							{
-								"color": "#ffe15f"
-							}
-						]
-					},
-					{
-						"featureType": "road.highway",
-						"elementType": "geometry.stroke",
-						"stylers": [
-							{
-								"color": "#efd151"
-							}
-						]
-					},
-					{
-						"featureType": "road.arterial",
-						"elementType": "geometry.fill",
-						"stylers": [
-							{
-								"color": "#ffffff"
-							}
-						]
-					},
-					{
-						"featureType": "road.local",
-						"elementType": "geometry.fill",
-						"stylers": [
-							{
-								"color": "black"
-							}
-						]
-					},
-					{
-						"featureType": "transit.station.airport",
-						"elementType": "geometry.fill",
-						"stylers": [
-							{
-								"color": "#cfb2db"
-							}
-						]
-					},
-					{
-						"featureType": "water",
-						"elementType": "geometry",
-						"stylers": [
-							{
-								"color": "#a2daf2"
-							}
-						]
-					}
-				]
-			};
-
-			// Get the HTML DOM element that will contain your map
-			// We are using a div with id="map" seen below in the <body>
+			// Get the HTML element that will contain our map
 			var mapElement = document.getElementById('google-map-one');
 
-			// Create the Google Map using our element and options defined above
-			var map = new google.maps.Map(mapElement, mapOptions);
+			if (!mapElement) return;
 
-			// Let's also add a marker while we're at it
-			var marker = new google.maps.Marker({
-				position: new google.maps.LatLng(15.9752064,108.2516492),
-				map: map,
-				title: 'VKU University',
-				icon: "{{ asset('frontend/images/map-marker.png') }}"
-			});
+			// Create the map centered on Lạc Long Quân, Cầu Giấy, Hà Nội
+			var map = L.map(mapElement).setView([21.0336, 105.7875], 16);
+
+			// Add OpenStreetMap tiles
+			L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '© OpenStreetMap contributors',
+				maxZoom: 19
+			}).addTo(map);
+
+			// Add a marker at correct location
+			var marker = L.marker([21.0336, 105.7875]).addTo(map);
+			marker.bindPopup('<strong>225 Lạc Long Quân<br>Nghĩa Đô, Cầu Giấy, Hà Nội</strong>');
 		}
 	</script>
 	<script type="text/javascript">

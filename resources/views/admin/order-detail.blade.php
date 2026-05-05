@@ -42,8 +42,18 @@
                                     </tr>
                                 @endforeach
 
-
-
+                                    <tr>
+                                        <th scope="row" colspan="4" class="text-right">Trạng thái đơn hàng :</th>
+                                        <td>
+                                            @if ($Order_detail->OrderStatus==0)
+                                                <span class="badge bg-soft-warning text-warning" style="font-size: 12px; padding: 6px 12px;">Chờ xử lí</span>
+                                            @elseif ($Order_detail->OrderStatus==1)
+                                                <span class="badge bg-soft-info text-info" style="font-size: 12px; padding: 6px 12px;">Đã duyệt</span>
+                                            @elseif ($Order_detail->OrderStatus==2)
+                                                <span class="badge bg-soft-success text-success" style="font-size: 12px; padding: 6px 12px;">Đã giao</span>
+                                            @endif
+                                        </td>
+                                    </tr>
 
                                     <tr>
                                         <th scope="row" colspan="4" class="text-right">Phí vận chuyển :</th>
@@ -121,6 +131,37 @@
 
         </div>
         <!-- end row -->
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="header-title mb-3">Quản lý đơn hàng</h4>
+                        <div class="btn-group" role="group">
+                            @if ($Order_detail->OrderStatus == 0)
+                                <a href="{{URL::to('/accept_order/id='.$Order_detail->OrderID.'')}}" class="btn btn-primary">
+                                    <i class="feather-check"></i> Duyệt đơn
+                                </a>
+                            @elseif ($Order_detail->OrderStatus == 1)
+                                <a href="{{URL::to('/delivered_order/id='.$Order_detail->OrderID.'')}}" class="btn btn-success">
+                                    <i class="feather-check-circle"></i> Đánh dấu đã giao
+                                </a>
+                                <a href="{{URL::to('/unaccept_order/id='.$Order_detail->OrderID.'')}}" class="btn btn-warning">
+                                    <i class="feather-x"></i> Hoàn lại chờ xử lí
+                                </a>
+                            @elseif ($Order_detail->OrderStatus == 2)
+                                <button class="btn btn-success" disabled>
+                                    <i class="feather-check"></i> Đơn hàng đã hoàn thành
+                                </button>
+                                <a href="{{URL::to('/unaccept_order/id='.$Order_detail->OrderID.'')}}" class="btn btn-warning">
+                                    <i class="feather-x"></i> Quay lại
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div> <!-- container -->
 

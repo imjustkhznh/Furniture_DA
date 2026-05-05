@@ -69,27 +69,22 @@
       <div class="offset-xl-1 col-xl-4 col-lg-6 col-md-6 mb-sm-50">
 
         <div class="about-page-text">
-          <p class=" mb-35">Với sự phát triển không ngừng đến nay công ty CP quảng cáo và trang trí nội thất ORANGE mới có gần 1 năm trên thị trường thiết kế nội thất.
-            Các sản phẩm về nội thất của shop đã bắt đầu được biết đến và tin tưởng tại thị trường trong nước.
-            Lần ra mắt thương hiệu này nằm trong chiến lược phát triển mới giai đoạn 2019 – 2021, nhằm đưa ORANGE trở thành một trong những
-             thương hiệu hàng đầu Việt Nam và đánh dấu cho những bước tiến mới sang thị trường nước ngoài.
-            </p>
+          <p class=" mb-35">Với sự phát triển không ngừng đến nay công ty CP quảng cáo và trang trí nội thất ORANGE mới có gần 1 năm trên thị trường thiết kế nội thất. Các sản phẩm về nội thất của shop đã bắt đầu được biết đến và tin tưởng tại thị trường trong nước. Lần ra mắt thương hiệu này nằm trong chiến lược phát triển mới giai đoạn 2024 - 2026, nhằm đưa ORANGE trở thành một trong những thương hiệu hàng đầu Việt Nam và đánh dấu cho những bước tiến mới sang thị trường nước ngoài.</p>
         </div>
 
         <div class="lezada-widget lezada-widget--about mb-35">
           <h2 class="widget-title mb-25">Địa chỉ</h2>
-          <p class="widget-content">Trường ĐH-CNTT và TT Việt Hàn</p>
+          <p class="widget-content">225 Lạc Long Quân, Nghĩa Đô, Cầu Giấy, Hà Nội</p>
         </div>
 
         <div class="lezada-widget lezada-widget--about mb-35">
           <h2 class="widget-title mb-25">Số điện thoại</h2>
-          <p class="widget-content">Mobile: 0705459542</p>
-          <p class="widget-content">Hotline: 1900 1006</p>
+          <p class="widget-content">Hotline: 0112345678</p>
         </div>
 
         <div class="lezada-widget lezada-widget--about">
           <h2 class="widget-title mb-25">Email</h2>
-          <p class="widget-content">nsthien.19it4@vku.udn.vn</p>
+          <p class="widget-content">khanhshrimp171204@gmail.com</p>
         </div>
 
       </div>

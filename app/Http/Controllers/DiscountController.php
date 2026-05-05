@@ -33,6 +33,18 @@ class DiscountController extends Controller
         return view('admin.add_discount');
     }
 
+    public function edit_discount($DiscountID)
+    {
+        $discount = Discount::where('DiscountID', $DiscountID)->first();
+        if (!$discount) {
+            Session::put('message', 'Không tìm thấy khuyến mãi');
+
+            return Redirect::to('/discount-manager');
+        }
+
+        return view('admin.edit_discount')->with(compact('discount'));
+    }
+
     public function delete_discount($DiscountID)
     {
         DB::table('tbl_discount')->where('DiscountID', $DiscountID)->delete();
@@ -82,6 +94,16 @@ class DiscountController extends Controller
 
     public function add_discount_data(Request $request)
     {
+        $request->validate([
+            'DisName' => 'required|string|max:255',
+            'DisCode' => 'required|string|max:100|unique:tbl_discount,DiscountCode',
+            'DisType' => 'required|in:1,2',
+            'DisValue' => 'required|numeric|min:1',
+            'DisDescrip' => 'required|string|max:1000',
+            'DisStart' => 'required|date',
+            'DisEnd' => 'required|date|after_or_equal:DisStart',
+        ]);
+
         $data = $request->all();
         $discount = new Discount;
         $discount->DiscountName = $data['DisName'];
@@ -95,6 +117,40 @@ class DiscountController extends Controller
         Session::put('message', 'Thêm khuyến mãi thành công');
 
         return Redirect::to('/add-discount');
+    }
+
+    public function update_discount_data(Request $request, $DiscountID)
+    {
+        $discount = Discount::where('DiscountID', $DiscountID)->first();
+        if (!$discount) {
+            Session::put('message', 'Không tìm thấy khuyến mãi');
+
+            return Redirect::to('/discount-manager');
+        }
+
+        $request->validate([
+            'DisName' => 'required|string|max:255',
+            'DisCode' => 'required|string|max:100|unique:tbl_discount,DiscountCode,'.$DiscountID.',DiscountID',
+            'DisType' => 'required|in:1,2',
+            'DisValue' => 'required|numeric|min:1',
+            'DisDescrip' => 'required|string|max:1000',
+            'DisStart' => 'required|date',
+            'DisEnd' => 'required|date|after_or_equal:DisStart',
+        ]);
+
+        $data = $request->all();
+        $discount->DiscountName = $data['DisName'];
+        $discount->DiscountCode = $data['DisCode'];
+        $discount->DiscountType = $data['DisType'];
+        $discount->DiscountValue = $data['DisValue'];
+        $discount->DiscountDescript = $data['DisDescrip'];
+        $discount->DiscountStart = $data['DisStart'];
+        $discount->DiscountEnd = $data['DisEnd'];
+        $discount->save();
+
+        Session::put('message', 'Cập nhật khuyến mãi thành công');
+
+        return Redirect::to('/discount-manager');
     }
 
     public function delete_code()

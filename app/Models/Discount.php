@@ -19,7 +19,7 @@ class Discount extends Model
         'DiscountEnd',
     ];
 
-    protected $primatyKey = 'DiscountID';
+    protected $primaryKey = 'DiscountID';
 
     protected $table = 'tbl_discount';
 }

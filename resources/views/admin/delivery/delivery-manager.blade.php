@@ -9,10 +9,26 @@
         <div class="row">
             <div class="col-12">
                 <div class="page-title-box">
-                    <h4 class="page-title">Customers</h4>
+                    <h4 class="page-title">Quản lý phí vận chuyển</h4>
                 </div>
             </div>
         </div>
+        <?php
+        $message = Session::get('message');
+        if (isset($message)) {
+            echo '<p class="text-muted mb-4 mt-3"><strong>Thông báo: </strong>'.$message.'</p>';
+            Session::put('message', null);
+        }
+        ?>
+        @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                <li>{{$error}}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <!-- end page title -->
 
 
@@ -40,7 +56,7 @@
                                         <th>Quận / Huyện</th>
                                         <th>Xã / Phường</th>
                                         <th>Phí ship</th>
-                                        <th style="width: 85px;">Action</th>
+                                        <th style="width: 220px;">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -61,12 +77,14 @@
                                         <td>
                                             {{$value->name_xa}}
                                         </td>
+                                        <td>{{number_format($value->ship_money)}} VNĐ</td>
                                         <td>
-                                            {{number_format($value->ship_money)}} VNĐ
-                                        </td>
-                                        <td>
-                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-square-edit-outline"></i></a>
-                                            <a href="javascript:void(0);" class="action-icon"> <i class="mdi mdi-delete"></i></a>
+                                            <form action="{{URL::to('/update-feeship/'.$value->feeID)}}" method="post" class="d-inline-block">
+                                                @csrf
+                                                <input type="number" min="0" step="1000" name="ship_money" value="{{$value->ship_money}}" class="form-control d-inline-block" style="width:120px;">
+                                                <button type="submit" class="btn btn-sm btn-info">Lưu</button>
+                                            </form>
+                                            <a href="{{URL::to('/delete-feeship/'.$value->feeID)}}" class="btn btn-sm btn-danger" onclick="return confirm('Xóa dòng phí ship này?')">Xóa</a>
                                         </td>
                                     </tr>
                                     @endforeach

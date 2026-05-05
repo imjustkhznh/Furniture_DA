@@ -439,14 +439,16 @@
 					<div class="row align-items-center">
 						<div class="col-lg-4 col-xl-5">
 							<div class="countdown-image text-center">
-								<img src="{{ asset('frontend/images/countdown-4.png') }}" class="img-fluid" alt="">
+								<a href="{{ URL::to('/home') }}">
+									<img src="{{ asset('frontend/images/countdown-4.png') }}" class="img-fluid" alt="">
+								</a>
 							</div>
 						</div>
 						<div class=" col-12 col-xl-7 col-lg-8">
 							<div class="countdown-wrapper text-center">
 								<h3>Deal of the day</h3>
-								<div class="deal-countdown" data-countdown="2020/12/28"></div>
-								<a href="shop-left-sidebar.html" class="lezada-button lezada-button--medium lezada-button--icon--left">
+								<div class="deal-countdown" data-countdown="{{ $dealEndDate }}"></div>
+								<a href="{{ URL::to('/shop') }}" class="lezada-button lezada-button--medium lezada-button--icon--left">
 									<i class="icon-left ion-ios-cart"></i> Only $39</a>
 							</div>
 						</div>

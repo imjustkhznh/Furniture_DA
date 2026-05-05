@@ -58,6 +58,7 @@ Route::get('/order-manager', 'App\Http\Controllers\OrderController@order_manager
 Route::get('/delete-order/id={OdID}', 'App\Http\Controllers\OrderController@delete_order');
 Route::get('/accept_order/id={OdID}', 'App\Http\Controllers\OrderController@accept_order');
 Route::get('/unaccept_order/id={OdID}', 'App\Http\Controllers\OrderController@unaccept_order');
+Route::get('/delivered_order/id={OdID}', 'App\Http\Controllers\OrderController@delivered_order');
 Route::get('/view-detail-order/id={OdID}', 'App\Http\Controllers\OrderController@view_order');
 
 // Quản lí slide
@@ -70,7 +71,9 @@ Route::post('/edit-slide-data', 'App\Http\Controllers\SlideController@edit_slide
 // Khuyến mãi
 Route::get('/discount-manager', 'App\Http\Controllers\DiscountController@discount_manager');
 Route::get('/add-discount', 'App\Http\Controllers\DiscountController@add_discount');
+Route::get('/edit-discount_id={DiscountID}', 'App\Http\Controllers\DiscountController@edit_discount');
 Route::post('/add-discount-data', 'App\Http\Controllers\DiscountController@add_discount_data');
+Route::post('/update-discount-data/{DiscountID}', 'App\Http\Controllers\DiscountController@update_discount_data');
 Route::get('/delete-discount_id={DiscountID}', 'App\Http\Controllers\DiscountController@delete_discount');
 Route::post('/check-discount', 'App\Http\Controllers\DiscountController@check_discount');
 Route::get('/delete-code', 'App\Http\Controllers\DiscountController@delete_code');
@@ -137,6 +140,8 @@ Route::post('/contact-mail','App\Http\Controllers\MailController@send_mail');
 Route::get('/delivery-manager','App\Http\Controllers\DeliveryController@delivery');
 Route::post('/select-delivery','App\Http\Controllers\DeliveryController@select_delivery');
 Route::post('/add-feeship','App\Http\Controllers\DeliveryController@add_ship');
+Route::post('/update-feeship/{feeID}','App\Http\Controllers\DeliveryController@update_ship');
+Route::get('/delete-feeship/{feeID}','App\Http\Controllers\DeliveryController@delete_ship');
 Route::post('/select-delivery-home','App\Http\Controllers\CheckoutController@select_delivery_home');
 // Kkieemr tra don hang
 Route::get('/track-ID','App\Http\Controllers\CartController@track_id');

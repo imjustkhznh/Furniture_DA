@@ -55,6 +55,15 @@ class OrderController extends Controller
         return Redirect::to('/order-manager');
     }
 
+    public function delivered_order($OdID)
+    {
+        $this->AuthLogin();
+        DB::table('tbl_order')->where('OrderID', $OdID)->update(['OrderStatus' => 2]);
+        Session::put('message', 'Đơn hàng đã giao thành công');
+
+        return Redirect::to('/view-detail-order/id=' . $OdID);
+    }
+
     public function view_order($OdID)
     {
         $this->AuthLogin();

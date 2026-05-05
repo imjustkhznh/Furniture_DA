@@ -16,6 +16,15 @@
 
                     <form class="" action="{{URL::to('/add-discount-data')}}" method="post">
                       {{csrf_field()}}
+                      @if ($errors->any())
+                      <div class="alert alert-danger">
+                        <ul class="mb-0">
+                          @foreach ($errors->all() as $error)
+                          <li>{{$error}}</li>
+                          @endforeach
+                        </ul>
+                      </div>
+                      @endif
                       <div class="row">
                         <div class="col-lg-12">
                             <div class="card-box">
@@ -31,40 +40,40 @@
 
                                 <div class="form-group mb-3">
                                     <label for="discount-name">Tên khuyến mãi  <span class="text-danger">*</span></label>
-                                    <input type="text" id="discount-name" name="DisName" class="form-control" placeholder="Tên khuyến mãi">
+                                    <input type="text" id="discount-name" name="DisName" class="form-control" placeholder="Tên khuyến mãi" value="{{old('DisName')}}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="discount-code">Mã khuyến mãi  <span class="text-danger">*</span></label>
-                                    <input type="text" id="discount-code" name="DisCode" class="form-control" placeholder="Mã khuyến mãi">
+                                    <input type="text" id="discount-code" name="DisCode" class="form-control" placeholder="Mã khuyến mãi" value="{{old('DisCode')}}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="product-category">Hình thức giảm <span class="text-danger">*</span></label>
                                     <select class="form-control select2" name="DisType" id="product-category">
-                                        <option value="1">Giảm theo %</option>
-                                        <option value="2">Giảm theo số tiền</option>
+                                        <option value="1" {{old('DisType') == '1' ? 'selected' : ''}}>Giảm theo %</option>
+                                        <option value="2" {{old('DisType') == '2' ? 'selected' : ''}}>Giảm theo số tiền</option>
                                     </select>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="DisValue">Giá trị khuyến mãi  <span class="text-danger">*</span></label>
-                                    <input type="text" id="DisValue" name="DisValue" class="form-control" placeholder="Giá trị khuyến mãi">
+                                    <input type="text" id="DisValue" name="DisValue" class="form-control" placeholder="Giá trị khuyến mãi" value="{{old('DisValue')}}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="DisDescrip">Mô tả khuyến mãi <span class="text-danger">*</span></label>
-                                    <textarea class="form-control" id="DisDescrip" name="DisDescrip" rows="5" placeholder="Nhập mô tả khuyến mãi"></textarea>
+                                    <textarea class="form-control" id="DisDescrip" name="DisDescrip" rows="5" placeholder="Nhập mô tả khuyến mãi">{{old('DisDescrip')}}</textarea>
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="DisStart">Ngày bắt đầu  <span class="text-danger">*</span></label>
-                                    <input type="date" id="DisStart" name="DisStart" class="form-control">
+                                    <input type="date" id="DisStart" name="DisStart" class="form-control" value="{{old('DisStart')}}">
                                 </div>
 
                                 <div class="form-group mb-3">
                                     <label for="DisEnd">Ngày kết thúc  <span class="text-danger">*</span></label>
-                                    <input type="date" id="DisEnd" name="DisEnd" class="form-control">
+                                    <input type="date" id="DisEnd" name="DisEnd" class="form-control" value="{{old('DisEnd')}}">
                                 </div>
 
 

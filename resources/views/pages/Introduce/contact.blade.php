@@ -70,7 +70,7 @@
           </div>
           <div class="icon-box-content">
             <h3 class="title">Địa chỉ</h3>
-            <p class="content">Trường ĐH-CNTT và TT Việt Hàn</p>
+            <p class="content">225 Lạc Long Quân, Nghĩa Đô, Cầu Giấy, Hà Nội</p>
           </div>
         </div>
 
@@ -85,7 +85,7 @@
           </div>
           <div class="icon-box-content">
             <h3 class="title">Liên hệ</h3>
-            <p class="content">Mobile: 0705459542 <span>Hotline: 1900 1006</span></p>
+            <p class="content"><span>Hotline: 0112345678</span></p>
           </div>
         </div>
 
@@ -94,7 +94,7 @@
             <i class="ion-ios-email"></i>
           </div>
           <div class="icon-box-content">
-            <p class="content"> Email: nsthien.19it4@vku.udn.vn </p>
+            <p class="content"> Email: khanhshrimp171204@gmail.com </p>
           </div>
         </div>
 

@@ -32,7 +32,7 @@
             <!--=======  single product image  =======-->
 
             <div class="single-product__image">
-              <a class="image-wrap" href="{{URL::to('/Detail-product/IDPD'.$value->ProductID.'')}}">
+              <a class="image-wrap" href="{{URL::to('/Detail-product_'.$value->ProductID.'')}}">
                 <img src="{{ asset('Upload/Product/'.($value->ProductImage1 && file_exists(public_path('Upload/Product/'.$value->ProductImage1)) ? $value->ProductImage1 : 'no-image.svg')) }}" class="img-fluid" alt="">
                 <img src="{{ asset('Upload/Product/'.($value->ProductImage2 && file_exists(public_path('Upload/Product/'.$value->ProductImage2)) ? $value->ProductImage2 : 'no-image.svg')) }}" class="img-fluid" alt="">
               </a>

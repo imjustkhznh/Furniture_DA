@@ -39,7 +39,15 @@
 
 									<div class="section-title section-title--login text-center mb-50">
 										<h2 class="mb-20">Đăng nhập</h2>
-										<p>Tuyệt vời bạn đã trở lại !</p>
+										<?php
+										$message = Session::get('message');
+										if (isset($message)) {
+											echo '<p><strong>Thông báo:</strong> '.$message.'</p>';
+											Session::put('message', null);
+										} else {
+											echo '<p>Tuyệt vời bạn đã trở lại !</p>';
+										}
+										?>
 									</div>
 
 									<!--=======  End of login title  =======-->

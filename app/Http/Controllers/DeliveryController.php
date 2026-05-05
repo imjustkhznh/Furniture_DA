@@ -45,7 +45,25 @@ class DeliveryController extends Controller
 
     public function add_ship(Request $request)
     {
+        $request->validate([
+            'City' => 'required|not_in:0',
+            'District' => 'required|not_in:0',
+            'Commune' => 'required|not_in:0',
+            'shipmoney' => 'required|numeric|min:0',
+        ]);
+
         $data = $request->all();
+
+        $exists = Shipmoney::where('matp', $data['City'])
+            ->where('maqh', $data['District'])
+            ->where('xaid', $data['Commune'])
+            ->first();
+        if ($exists) {
+            Session::put('message', 'Khu vực này đã có phí ship, hãy sửa trực tiếp ở danh sách');
+
+            return Redirect::to('/delivery-manager');
+        }
+
         $feeship = new Shipmoney;
         $feeship->matp = $data['City'];
         $feeship->maqh = $data['District'];
@@ -53,6 +71,39 @@ class DeliveryController extends Controller
         $feeship->ship_money = $data['shipmoney'];
         $feeship->save();
         Session::put('message', 'Thêm thành công');
+
+        return Redirect::to('/delivery-manager');
+    }
+
+    public function update_ship(Request $request, $feeID)
+    {
+        $request->validate([
+            'ship_money' => 'required|numeric|min:0',
+        ]);
+
+        $feeship = Shipmoney::where('feeID', $feeID)->first();
+        if (!$feeship) {
+            Session::put('message', 'Không tìm thấy dòng phí ship cần sửa');
+
+            return Redirect::to('/delivery-manager');
+        }
+
+        $feeship->ship_money = $request->input('ship_money');
+        $feeship->save();
+        Session::put('message', 'Cập nhật phí ship thành công');
+
+        return Redirect::to('/delivery-manager');
+    }
+
+    public function delete_ship($feeID)
+    {
+        $feeship = Shipmoney::where('feeID', $feeID)->first();
+        if ($feeship) {
+            $feeship->delete();
+            Session::put('message', 'Xóa phí ship thành công');
+        } else {
+            Session::put('message', 'Không tìm thấy dòng phí ship cần xóa');
+        }
 
         return Redirect::to('/delivery-manager');
     }

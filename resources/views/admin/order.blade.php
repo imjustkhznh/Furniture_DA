@@ -57,14 +57,15 @@
                                                   <tr>
                                                       <td>ĐH-{{$value->OrderID}}</td>
                                                       <td><a href="javascript:void(0);" class="text-body font-weight-semibold">{{$value->CustomerName}}</a></td>
-                                                      <td>22 Jun 2017</td>
+                                                      <td>{{ $value->OrderDate ? date('d M Y', strtotime($value->OrderDate)) : 'N/A' }}</td>
                                                       <td>{{$value->OrderTotal}} VNĐ</td>
                                                       <td>
-                                                          @if ($value->OrderStatus==1)
-                                                          <a class="badge bg-soft-success text-success" href="{{URL::to('/unaccept_order/id='.$value->OrderID.'')}}" style="font-size: 16px;">Đã duyệt</i></a>
-                                                            @endif
                                                           @if ($value->OrderStatus==0)
-                                                            <a class="badge bg-soft-warning text-warning" href="{{URL::to('/accept_order/id='.$value->OrderID.'')}}" style="font-size: 16px;">Chờ xử lí ...</i></a>
+                                                            <a class="badge bg-soft-warning text-warning" href="{{URL::to('/accept_order/id='.$value->OrderID.'')}}">Chờ xử lí</i></a>
+                                                          @elseif ($value->OrderStatus==1)
+                                                            <a class="badge bg-soft-info text-info" href="{{URL::to('/delivered_order/id='.$value->OrderID.'')}}">Đã duyệt</i></a>
+                                                          @elseif ($value->OrderStatus==2)
+                                                            <a class="badge bg-soft-success text-success" href="javascript:void(0);">Đã giao</i></a>
                                                           @endif
                                                         </td>
                                                       <td>

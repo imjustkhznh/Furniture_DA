@@ -187,12 +187,19 @@ class ProductController extends Controller
         $brandProduct = DB::table('tbl_brand')->where('BrandStatus', 1)->orderby('BrandID', 'DESC')->get();
         $Product_all = DB::table('tbl_product')->get();
         $product = DB::table('tbl_product')->where('ProductID', $prodID)->join('tbl_category_product', 'tbl_category_product.CategoryID', '=', 'tbl_product.CategoryID')->join('tbl_brand', 'tbl_brand.BrandID', '=', 'tbl_product.BrandID')->get();
+        
+        $catePro_recen = 0;
         foreach ($product as $key => $value) {
             $catePro_recen = $value->CategoryID;
         }
+        
         $comment = DB::table('tbl_comment')->where('ProductID', $prodID)->get();
         $Rating = DB::table('tbl_comment')->where('ProductID', $prodID)->avg('Rating');
-        $product_recen = DB::table('tbl_product')->where('tbl_category_product.CategoryID', $catePro_recen)->join('tbl_category_product', 'tbl_category_product.CategoryID', '=', 'tbl_product.CategoryID')->join('tbl_brand', 'tbl_brand.BrandID', '=', 'tbl_product.BrandID')->whereNotIn('tbl_product.ProductID', [$prodID])->get();
+        
+        $product_recen = [];
+        if ($catePro_recen > 0) {
+            $product_recen = DB::table('tbl_product')->where('tbl_category_product.CategoryID', $catePro_recen)->join('tbl_category_product', 'tbl_category_product.CategoryID', '=', 'tbl_product.CategoryID')->join('tbl_brand', 'tbl_brand.BrandID', '=', 'tbl_product.BrandID')->whereNotIn('tbl_product.ProductID', [$prodID])->get();
+        }
 
         return view('pages.shop.detail_product')->with(compact('city', 'Rating'))->with('comment', $comment)->with('Customer', $Customer)->with('Product_all', $Product_all)->with('cateProduct', $cateProduct)->with('brandProduct', $brandProduct)->with('product', $product)->with('product_recen', $product_recen);
     }

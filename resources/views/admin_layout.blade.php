@@ -1,6 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+        @php
+            $isDashboard = request()->is('dashboard');
+            $isMailPage = request()->is('mail-manager') || request()->is('read-mail_id=*') || request()->is('reply_id=*') || request()->is('write-mail');
+            $isDeliveryPage = request()->is('delivery-manager');
+            $isProductFormPage = request()->is('add-product') || request()->is('edit-product/*');
+            $isDiscountFormPage = request()->is('add-discount') || request()->is('edit-discount_id=*');
+            $useSelect2 = $isProductFormPage || $isDiscountFormPage || $isDeliveryPage;
+            $useSummernote = $isMailPage;
+            $useDropzone = $isProductFormPage;
+            $useDataTable = !$isDashboard;
+        @endphp
 
         <meta charset="utf-8" />
         <title>Dashboard | Furni-ORANGE</title>
@@ -10,20 +21,30 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <!-- App favicon -->
 
+        @if ($useSelect2)
         <link href="{{asset('backend/libs/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" />
+        @endif
+        @if ($useSummernote)
         <link href="{{asset('backend/libs/summernote/summernote-bs4.min.css')}}" rel="stylesheet" type="text/css" />
+        @endif
+        @if ($useDropzone)
         <link href="{{asset('backend/libs/dropzone/min/dropzone.min.css')}}" rel="stylesheet" type="text/css" />
+        @endif
         <!-- App css -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <!-- third party css -->
+        @if ($useDataTable)
         <link href="{{asset('backend/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
         <link href="{{asset('backend/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+        @endif
         <link href="{{asset('backend/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" id="bs-default-stylesheet" />
         <link href="{{asset('backend/css/app.min.css')}}" rel="stylesheet" type="text/css" id="app-default-stylesheet" />
         <link href="{{asset('backend/css/bootstrap-dark.min.css')}}" rel="stylesheet" type="text/css" id="bs-dark-stylesheet" />
         <link href="{{asset('backend/css/app-dark.min.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
         <link href="{{asset('backend/feather.css')}}" rel="stylesheet" type="text/css" id="app-dark-stylesheet" />
+        @if ($useDataTable)
         <link href="{{asset('backend/libs/bootstrap-table/bootstrap-table.min.css')}}" rel="stylesheet" type="text/css" />
+        @endif
 
         <!-- icons -->
 
@@ -512,51 +533,44 @@
         <!-- Vendor js -->
         <script src="{{asset('backend/js/vendor.min.js')}}"></script>
 
+        @if ($isDashboard)
         <script src="{{asset('backend/libs/apexcharts/apexcharts.min.js')}}"></script>
-
         <script src="{{asset('backend/libs/selectize/js/standalone/selectize.min.js')}}"></script>
-
         <!-- Dashboar 1 init js-->
         <script src="{{asset('backend/js/pages/dashboard-1.init.js')}}"></script>
+        @endif
 
         <!-- App js-->
         <script src="{{asset('backend/js/app.min.js')}}"></script>
 
-        <!-- Summernote js -->
+        @if ($useSummernote)
         <script src="{{asset('backend/libs/summernote/summernote-bs4.min.js')}}"></script>
-        <!-- Select2 js-->
+        @endif
+        @if ($useSelect2)
         <script src="{{asset('backend/libs/select2/js/select2.min.js')}}"></script>
-        <!-- Dropzone file uploads-->
+        @endif
+        @if ($useDropzone)
         <script src="{{asset('backend/libs/dropzone/min/dropzone.min.js')}}"></script>
-
-        <!-- Init js-->
         <script src="{{asset('backend/js/pages/form-fileuploads.init.js')}}"></script>
-
-        <!-- Init js -->
+        @endif
+        @if ($isProductFormPage || $isDiscountFormPage)
         <script src="{{asset('backend/js/pages/add-product.init.js')}}"></script>
-
+        @endif
+        @if ($useDataTable)
         <script src="{{asset('backend/libs/datatables.net/js/jquery.dataTables.min.js')}}"></script>
-
         <script src="{{asset('backend/libs/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
-
         <script src="{{asset('backend/libs/datatables.net-responsive/js/dataTables.responsive.min.js')}}"></script>
-
         <script src="{{asset('backend/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js')}}"></script>
-
         <script src="{{asset('backend/libs/jquery-datatables-checkboxes/js/dataTables.checkboxes.min.js')}}"></script>
-        <!-- third party js ends -->
         <script src="{{asset('backend/libs/bootstrap-table/bootstrap-table.min.js')}}"></script>
-
-        <!-- Init js -->
         <script src="{{asset('backend/js/pages/bootstrap-tables.init.js')}}"></script>
-
-        <!-- Datatables init -->
         <script src="{{asset('backend/js/pages/customers.init.js')}}"></script>
-
+        @endif
+        @if ($isMailPage)
         <script src="{{asset('backend/js/pages/inbox.js')}}"></script>
+        @endif
 
-        <script src="{{asset('backend/libs/summernote/summernote-bs4.min.js')}}"></script>
-
+        @if ($useSummernote)
         <script>
             jQuery(document).ready(function(){
                 $('.summernote').summernote({
@@ -567,7 +581,9 @@
                 });
             });
         </script>
+        @endif
 
+        @if ($isDeliveryPage)
         <script type="text/javascript">
           $(document).ready(function(){
             $('.choose').on('change',function(){
@@ -594,6 +610,7 @@
             // });
           })
        </script>
+       @endif
 
     </body>
 </html>
