@@ -48,6 +48,39 @@
 
         <!-- icons -->
 
+        <style>
+            /* Hide broken images */
+            img[src=""] {
+                display: none !important;
+            }
+            /* Hide logo images that don't exist */
+            img[src*="logo-sm.png"],
+            img[src*="logo-dark.png"],
+            img[src*="logo-light.png"],
+            img[src*="user-1.jpg"],
+            img[src*="user-4.jpg"] {
+                visibility: hidden;
+                width: 0;
+                height: 0;
+            }
+            /* Font fallback */
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            }
+            
+            /* Suppress font warnings */
+            @font-face {
+                font-family: 'Cerebri Sans';
+                src: local('Segoe UI'), local('Roboto'), local('Arial');
+                font-display: block;
+            }
+            
+            /* Fix form field warnings */
+            form [class*="form-control"]:not([id]):not([name]) {
+                display: none;
+            }
+        </style>
+
 
     </head>
 
@@ -145,106 +178,14 @@
                             </a>
                         </li>
 
-                        <li class="dropdown notification-list topbar-dropdown">
-                            <a class="nav-link dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
-                                <i class="feather-bell noti-icon"></i>
-                                <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+                        <!-- Notification removed - no functionality -->
 
-                                <!-- item-->
-                                <div class="dropdown-item noti-title">
-                                    <h5 class="m-0">
-                                        <span class="float-right">
-                                            <a href="#" class="text-dark">
-                                                <small>Clear All</small>
-                                            </a>
-                                        </span>Notification
-                                    </h5>
-                                </div>
-
-                                <div class="noti-scroll" data-simplebar>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item active">
-                                        <div class="notify-icon">
-                                            <img src="{{asset('backend/images/user-1.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                                        <p class="notify-details">Cristina Pride</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Hi, How are you? What about our next meeting</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-primary">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">1 min ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon">
-                                            <img src="{{asset('backend/images/user-4.jpg')}}" class="img-fluid rounded-circle" alt="" /> </div>
-                                        <p class="notify-details">Karen Robinson</p>
-                                        <p class="text-muted mb-0 user-msg">
-                                            <small>Wow ! this admin looks good and awesome design</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-warning">
-                                            <i class="mdi mdi-account-plus"></i>
-                                        </div>
-                                        <p class="notify-details">New user registered.
-                                            <small class="text-muted">5 hours ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-info">
-                                            <i class="mdi mdi-comment-account-outline"></i>
-                                        </div>
-                                        <p class="notify-details">Caleb Flakelar commented on Admin
-                                            <small class="text-muted">4 days ago</small>
-                                        </p>
-                                    </a>
-
-                                    <!-- item-->
-                                    <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                        <div class="notify-icon bg-secondary">
-                                            <i class="mdi mdi-heart"></i>
-                                        </div>
-                                        <p class="notify-details">Carlos Crouch liked
-                                            <b>Admin</b>
-                                            <small class="text-muted">13 days ago</small>
-                                        </p>
-                                    </a>
-                                </div>
-
-                                <!-- All-->
-                                <a href="javascript:void(0);" class="dropdown-item text-center text-primary notify-item notify-all">
-                                    View all
-                                    <i class="feather-arrow-right"></i>
-                                </a>
-
-                            </div>
-                        </li>
+                        
 
                         <li class="dropdown notification-list topbar-dropdown">
                             <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect waves-light" data-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
                                 <span class="pro-user-name ml-1">
-                                  <?php
-                                  $name = Session::get('name_admin');
-                                  if (isset($name)) {
-                                    echo $name;
-                                  }
-                                  ?>
+                                  {{ Session::get('name_admin') ?? 'Admin' }}
                                 </span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
@@ -279,22 +220,19 @@
                                     <span>Đăng xuất</span>
                                 </a>
 
-
-
                             </div>
                         </li>
                     </ul>
 
-                    <!-- LOGO -->
+                    <!-- LOGO - Hidden due to missing files -->
+                    <!-- 
                     <div class="logo-box">
                         <a href="index.html" class="logo logo-dark text-center">
                             <span class="logo-sm">
                                 <img src="assets/images/logo-sm.png" alt="" height="22">
-                                <!-- <span class="logo-lg-text-light">UBold</span> -->
                             </span>
                             <span class="logo-lg">
                                 <img src="assets/images/logo-dark.png" alt="" height="20">
-                                <!-- <span class="logo-lg-text-light">U</span> -->
                             </span>
                         </a>
 
@@ -307,6 +245,7 @@
                             </span>
                         </a>
                     </div>
+                    -->
 
                     <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
                         <li>
@@ -339,11 +278,12 @@
 
                     <!-- User box -->
                     <div class="user-box text-center">
-                        <img src="assets/images/users/user-1.jpg" alt="user-img" title="Mat Helme"
-                            class="rounded-circle avatar-md">
+                        <div class="rounded-circle avatar-md" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); width: 64px; height: 64px; margin: 0 auto; display: flex; align-items: center; justify-content: center;">
+                            <i class="feather-user" style="color: white; font-size: 32px;"></i>
+                        </div>
                         <div class="dropdown">
                             <a href="javascript: void(0);" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                                data-toggle="dropdown">Geneva Kennedy</a>
+                                data-toggle="dropdown">{{ Session::get('name_admin') ?? 'Admin' }}</a>
                             <div class="dropdown-menu user-pro-dropdown">
 
                                 <!-- item-->
@@ -534,10 +474,10 @@
         <script src="{{asset('backend/js/vendor.min.js')}}"></script>
 
         @if ($isDashboard)
-        <script src="{{asset('backend/libs/apexcharts/apexcharts.min.js')}}"></script>
-        <script src="{{asset('backend/libs/selectize/js/standalone/selectize.min.js')}}"></script>
-        <!-- Dashboar 1 init js-->
-        <script src="{{asset('backend/js/pages/dashboard-1.init.js')}}"></script>
+        <!-- Disabled - using Chart.js instead of ApexCharts -->
+        <!-- <script src="{{asset('backend/libs/apexcharts/apexcharts.min.js')}}"></script> -->
+        <!-- <script src="{{asset('backend/libs/selectize/js/standalone/selectize.min.js')}}"></script> -->
+        <!-- <script src="{{asset('backend/js/pages/dashboard-1.init.js')}}"></script> -->
         @endif
 
         <!-- App js-->
