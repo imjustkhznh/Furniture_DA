@@ -39,7 +39,17 @@ class HomeController extends Controller
 
     public function search_key(Request $request)
     {
-        $Popular = DB::table('tbl_bill_detail')->join('tbl_product', 'tbl_product.ProductID', '=', 'tbl_bill_detail.ProductID')->select('tbl_product.*', 'tbl_bill_detail.ProductID')->distinct()->orderby('tbl_bill_detail.ProductQuanty', 'ASC')->limit(3)->get();
+        $popularIds = DB::table('tbl_bill_detail')
+            ->select('ProductID', DB::raw('SUM(ProductQuanty) as TotalSold'))
+            ->groupBy('ProductID')
+            ->orderBy('TotalSold', 'ASC')
+            ->limit(3);
+        $Popular = DB::table('tbl_product')
+            ->joinSub($popularIds, 'popular', function ($join) {
+                $join->on('tbl_product.ProductID', '=', 'popular.ProductID');
+            })
+            ->select('tbl_product.*', 'popular.TotalSold')
+            ->get();
         $cateProduct = DB::table('tbl_category_product')->where('CategoryStatus', 1)->orderby('CategoryID', 'DESC')->get();
         $brandProduct = DB::table('tbl_brand')->where('BrandStatus', 1)->orderby('BrandID', 'DESC')->get();
         $word_key = $request->Search;
