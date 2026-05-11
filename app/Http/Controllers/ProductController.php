@@ -70,29 +70,44 @@ class ProductController extends Controller
         $data['ProductName'] = $request->productName;
         $data['ProductPrice'] = $request->price;
         $data['ProductQuanty'] = $request->quanty;
-        $data['ProductContent'] = $request->productContent;
-        $data['ProductDescrip'] = $request->productDes;
+        $data['ProductContent'] = $request->productContent ?? '';
+        $data['ProductDescrip'] = $request->productDes ?? '';
         $data['ProductColor'] = $request->color;
         $GetImage1 = $request->file('image1');
         $GetImage2 = $request->file('image2');
         $GetImage3 = $request->file('image3');
         if ($GetImage1 != null) {
             $Name_img1 = 'Product-'.rand(0, 2000).'.'.$GetImage1->getClientOriginalExtension();
-            $GetImage1->store($Name_img1);
-            $GetImage1->move('public/Upload/Product', $Name_img1);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage1->move($destinationPath, $Name_img1);
             $data['ProductImage1'] = $Name_img1;
+        } else {
+            $data['ProductImage1'] = 'no-image.svg';
         }
         if ($GetImage2 != null) {
             $Name_img2 = 'Product-'.rand(2001, 4000).'.'.$GetImage2->getClientOriginalExtension();
-            $GetImage2->store($Name_img2);
-            $GetImage2->move('public/Upload/Product', $Name_img2);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage2->move($destinationPath, $Name_img2);
             $data['ProductImage2'] = $Name_img2;
+        } else {
+            $data['ProductImage2'] = 'no-image.svg';
         }
         if ($GetImage3 != null) {
             $Name_img3 = 'Product-'.rand(4001, 6000).'.'.$GetImage3->getClientOriginalExtension();
-            $GetImage3->store($Name_img3);
-            $GetImage3->move('public/Upload/Product', $Name_img3);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage3->move($destinationPath, $Name_img3);
             $data['ProductImage3'] = $Name_img3;
+        } else {
+            $data['ProductImage3'] = 'no-image.svg';
         }
         DB::table('tbl_product')->where('ProductID', $request->ProductID)->update($data);
         Session::put('message', 'Cập nhật thành công');
@@ -109,8 +124,8 @@ class ProductController extends Controller
         $data['ProductName'] = $request->productName;
         $data['ProductPrice'] = $request->price;
         $data['ProductQuanty'] = $request->quanty;
-        $data['ProductContent'] = $request->productContent;
-        $data['ProductDescrip'] = $request->productDes;
+        $data['ProductContent'] = $request->productContent ?? '';
+        $data['ProductDescrip'] = $request->productDes ?? '';
         $data['ProductChienluoc'] = $request->chienluoc;
         $data['ProductColor'] = $request->color;
         $data['ProductStatus'] = $request->productStatus;
@@ -119,21 +134,36 @@ class ProductController extends Controller
         $GetImage3 = $request->file('image3');
         if ($GetImage1) {
             $Name_img1 = 'Product-'.rand(0, 2000).'.'.$GetImage1->getClientOriginalExtension();
-            $GetImage1->store($Name_img1);
-            $GetImage1->move('public/Upload/Product', $Name_img1);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage1->move($destinationPath, $Name_img1);
             $data['ProductImage1'] = $Name_img1;
+        } else {
+            $data['ProductImage1'] = 'no-image.svg';
         }
         if ($GetImage2) {
             $Name_img2 = 'Product-'.rand(2001, 4000).'.'.$GetImage2->getClientOriginalExtension();
-            $GetImage2->store($Name_img2);
-            $GetImage2->move('public/Upload/Product', $Name_img2);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage2->move($destinationPath, $Name_img2);
             $data['ProductImage2'] = $Name_img2;
+        } else {
+            $data['ProductImage2'] = 'no-image.svg';
         }
         if ($GetImage3) {
             $Name_img3 = 'Product-'.rand(4001, 6000).'.'.$GetImage3->getClientOriginalExtension();
-            $GetImage3->store($Name_img3);
-            $GetImage3->move('public/Upload/Product', $Name_img3);
+            $destinationPath = public_path('Upload/Product');
+            if (!file_exists($destinationPath)) {
+                mkdir($destinationPath, 0755, true);
+            }
+            $GetImage3->move($destinationPath, $Name_img3);
             $data['ProductImage3'] = $Name_img3;
+        } else {
+            $data['ProductImage3'] = 'no-image.svg';
         }
         DB::table('tbl_product')->insert($data);
         Session::put('message', 'Thêm thành công');
