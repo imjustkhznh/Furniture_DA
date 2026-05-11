@@ -127,6 +127,9 @@ class CheckoutController extends Controller
                     $data_BillDT['ProductQuanty'] = $value->quantity;
                     $detail_bill = DB::table('tbl_bill_detail')->insertGetId($data_BillDT);
                     Session::put('OrderDetail', $detail_bill);
+                    
+                    // Trừ số lượng sản phẩm từ kho
+                    DB::table('tbl_product')->where('ProductID', $value->id)->decrement('ProductQuanty', $value->quantity);
                 }
 
                 return Redirect::to('/completed-checkout');
