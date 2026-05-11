@@ -7,6 +7,7 @@ use DB;
 use Illuminate\Http\Request;
 use Redirect;
 use Session;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -78,34 +79,34 @@ class ProductController extends Controller
         $GetImage3 = $request->file('image3');
         if ($GetImage1 != null) {
             $Name_img1 = 'Product-'.rand(0, 2000).'.'.$GetImage1->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage1, $Name_img1);
+                $data['ProductImage1'] = $Name_img1;
+            } catch (\Exception $e) {
+                $data['ProductImage1'] = 'no-image.svg';
             }
-            $GetImage1->move($destinationPath, $Name_img1);
-            $data['ProductImage1'] = $Name_img1;
         } else {
             $data['ProductImage1'] = 'no-image.svg';
         }
         if ($GetImage2 != null) {
             $Name_img2 = 'Product-'.rand(2001, 4000).'.'.$GetImage2->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage2, $Name_img2);
+                $data['ProductImage2'] = $Name_img2;
+            } catch (\Exception $e) {
+                $data['ProductImage2'] = 'no-image.svg';
             }
-            $GetImage2->move($destinationPath, $Name_img2);
-            $data['ProductImage2'] = $Name_img2;
         } else {
             $data['ProductImage2'] = 'no-image.svg';
         }
         if ($GetImage3 != null) {
             $Name_img3 = 'Product-'.rand(4001, 6000).'.'.$GetImage3->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage3, $Name_img3);
+                $data['ProductImage3'] = $Name_img3;
+            } catch (\Exception $e) {
+                $data['ProductImage3'] = 'no-image.svg';
             }
-            $GetImage3->move($destinationPath, $Name_img3);
-            $data['ProductImage3'] = $Name_img3;
         } else {
             $data['ProductImage3'] = 'no-image.svg';
         }
@@ -134,34 +135,34 @@ class ProductController extends Controller
         $GetImage3 = $request->file('image3');
         if ($GetImage1) {
             $Name_img1 = 'Product-'.rand(0, 2000).'.'.$GetImage1->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage1, $Name_img1);
+                $data['ProductImage1'] = $Name_img1;
+            } catch (\Exception $e) {
+                $data['ProductImage1'] = 'no-image.svg';
             }
-            $GetImage1->move($destinationPath, $Name_img1);
-            $data['ProductImage1'] = $Name_img1;
         } else {
             $data['ProductImage1'] = 'no-image.svg';
         }
         if ($GetImage2) {
             $Name_img2 = 'Product-'.rand(2001, 4000).'.'.$GetImage2->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage2, $Name_img2);
+                $data['ProductImage2'] = $Name_img2;
+            } catch (\Exception $e) {
+                $data['ProductImage2'] = 'no-image.svg';
             }
-            $GetImage2->move($destinationPath, $Name_img2);
-            $data['ProductImage2'] = $Name_img2;
         } else {
             $data['ProductImage2'] = 'no-image.svg';
         }
         if ($GetImage3) {
             $Name_img3 = 'Product-'.rand(4001, 6000).'.'.$GetImage3->getClientOriginalExtension();
-            $destinationPath = public_path('Upload/Product');
-            if (!file_exists($destinationPath)) {
-                mkdir($destinationPath, 0755, true);
+            try {
+                Storage::disk('public')->putFileAs('products', $GetImage3, $Name_img3);
+                $data['ProductImage3'] = $Name_img3;
+            } catch (\Exception $e) {
+                $data['ProductImage3'] = 'no-image.svg';
             }
-            $GetImage3->move($destinationPath, $Name_img3);
-            $data['ProductImage3'] = $Name_img3;
         } else {
             $data['ProductImage3'] = 'no-image.svg';
         }

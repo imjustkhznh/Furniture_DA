@@ -293,7 +293,7 @@
                     <div class="product-item">
                         <div class="product-image">
                             @if($product->ProductImage1)
-                                <img src="{{ asset('Upload/Product/' . $product->ProductImage1) }}" alt="{{ $product->ProductName }}" onerror="this.parentElement.innerHTML='<img src=&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect fill=%27%23e2e8f0%27 width=%27100%27 height=%27100%27/%3E%3Ctext x=%2750%27 y=%2750%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-size=%2714%27 fill=%27%23a0aec0%27%3E📦%3C/text%3E%3C/svg%3E&quot; alt=&quot;No image&quot; />'" />
+                                <img src="{{ asset('storage/products/' . $product->ProductImage1) }}" alt="{{ $product->ProductName }}" onerror="this.parentElement.innerHTML='<img src=&quot;data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Crect fill=%27%23e2e8f0%27 width=%27100%27 height=%27100%27/%3E%3Ctext x=%2750%27 y=%2750%27 dominant-baseline=%27middle%27 text-anchor=%27middle%27 font-family=%27sans-serif%27 font-size=%2714%27 fill=%27%23a0aec0%27%3E📦%3C/text%3E%3C/svg%3E&quot; alt=&quot;No image&quot; />'" />
                             @else
                                 <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23e2e8f0' width='100' height='100'/%3E%3Ctext x='50' y='50' dominant-baseline='middle' text-anchor='middle' font-family='sans-serif' font-size='14' fill='%23a0aec0'%3E📦%3C/text%3E%3C/svg%3E" alt="No image" />
                             @endif
