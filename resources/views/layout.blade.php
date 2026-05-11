@@ -807,11 +807,18 @@
 					result = 'Commune';
 				}
 				$.ajax({
-					url: '{{url('/select-delivery-home')}}',
+					url: '/select-delivery-home',
 					type: 'POST',
 					data: { action: action, matp: matp, _token: _token },
 					success: function(data){
-						$('#'+result).html(data);
+						var $target = $('#'+result);
+						$target.html(data);
+						if ($.fn.niceSelect) {
+							$target.niceSelect('update');
+						}
+					},
+					error: function(xhr){
+						console.warn('select-delivery-home failed', xhr.status, xhr.responseText);
 					}
 				});
 			});
