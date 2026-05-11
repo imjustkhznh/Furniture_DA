@@ -142,7 +142,7 @@ Route::post('/select-delivery','App\Http\Controllers\DeliveryController@select_d
 Route::post('/add-feeship','App\Http\Controllers\DeliveryController@add_ship');
 Route::post('/update-feeship/{feeID}','App\Http\Controllers\DeliveryController@update_ship');
 Route::get('/delete-feeship/{feeID}','App\Http\Controllers\DeliveryController@delete_ship');
-Route::post('/select-delivery-home','App\Http\Controllers\CheckoutController@select_delivery_home');
+Route::match(['get', 'post'], '/select-delivery-home', 'App\Http\Controllers\CheckoutController@select_delivery_home');
 // Kkieemr tra don hang
 Route::get('/track-ID','App\Http\Controllers\CartController@track_id');
 Route::post('/send-bill','App\Http\Controllers\CartController@send_bill');

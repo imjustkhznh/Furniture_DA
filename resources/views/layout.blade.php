@@ -16,6 +16,7 @@
 
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<!-- Favicon -->
 
 	<!-- CSS
@@ -798,21 +799,21 @@
 			$('.choose').on('change',function(){
 				var action = $(this).attr('id');
 				var matp = $(this).val();
-				var _token =  $('input[name="_token"]').val();
+				var _token = $('meta[name="csrf-token"]').attr('content') || $('input[name="_token"]').val();
 				var result = '';
 				if (action == 'city') {
 					result = 'district';
 				}else {
 					result = 'Commune';
 				}
-				 $.ajax({
-					url : '{{url('/select-delivery-home')}}',
-				 	method : 'POST',
-					data:{action:action,matp:matp,_token:_token},
-					success:function(data){
-				 		$('#'+result).html(data);
-				 	}
-				 });
+				$.ajax({
+					url: '{{url('/select-delivery-home')}}',
+					type: 'POST',
+					data: { action: action, matp: matp, _token: _token },
+					success: function(data){
+						$('#'+result).html(data);
+					}
+				});
 			});
 			// $('.add_delivery').click(function(){
 			//   var city = $('.city').val();
