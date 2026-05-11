@@ -102,7 +102,7 @@ class CheckoutController extends Controller
                     $data_Order['DiscountCode'] = 'Không sử dụng';
                 }
                 $data_Order['OrderStatus'] = 0;
-                $data_Order['OrderDate'] = date('d/m/y');
+                $data_Order['OrderDate'] = date('Y-m-d');
                 $data_Order['PaymentMethod'] = $request->payment_method;
                 $data_Order['PaymentStatus'] = 0;
                 if (Session::get('discount')) {
